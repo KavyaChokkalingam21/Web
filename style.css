@@ -1,0 +1,175 @@
+/* General Reset */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+
+  /* Background gradient and image */
+  background: url('background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+} 
+
+/* Envelope container styling */
+.envelope-container {
+  position: relative;
+  width: 20vw; /* Responsive width */
+  height: calc(20vw * 0.75); /* Maintain aspect ratio */
+  transition: all 0.3s ease; /* Smooth transition for resizing */
+  max-width: 300px; /* Prevent it from getting too large */
+  min-width: 120px; /* Prevent it from getting too small */
+}
+
+/* Envelope styling */
+.envelope {
+  position: relative;
+  width: 200%;
+  height: 200%;
+  left:-60%;
+  bottom: 50%;
+  background: #808000;
+  border-radius: 5px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
+}
+
+/* Flap styling */
+.flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background: #DAA520;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: bottom;
+  transform: rotateX(0deg);
+  backface-visibility: hidden;
+  transition: transform 0.3s ease, top 0.3s ease;
+}
+
+/* Heart on the flap */
+.flap::before {
+  content: '❤'; /* Heart symbol */
+  position: absolute;
+  top: 86%; /* Positioning at the center of the flap */
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  font-size: 4rem;
+  color: #ff4d4d; /* Heart color */
+  z-index: 5; /* Ensure it's visible on top */
+}
+
+/* Hover: Flap moves upward and exposes underside */
+.envelope:hover .flap {
+  transform: rotateX(180deg);
+  top: -50%;
+}
+
+/* Image Container (Card 1 replacement) */
+.image-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%) translateY(20px);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.envelope:hover .image-container {
+  opacity: 1;
+  transform: translate(-50%, -50%) translateY(-10px) scale(1.05);
+}
+
+/* Card styling */
+.card-2 {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  width: 200%;
+  height: 100%;
+  background: #fff;
+  border-radius: 10px;
+  transform: translate(-50%, -50%) translateY(200px);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease, z-index 0.3s ease;
+}
+
+.card-2 .card-content {
+  padding: 2rem; /* Scalable padding */
+  font-size: 1rem; /* Use relative font size */
+}
+  
+.card-2 .card-content p {
+  font-family: 'Dancing Script', Cursive;  /* Change font style */
+  font-size: 1.0rem;                 /* Adjust font size */
+  color: #8B0000;                    /* Change text color */
+  text-align: left;                /* Optional: center the text */
+  line-height: 1.2;                  /* Adjust line height for readability */
+}
+
+/* Card 2 specific styling */
+.card-2 {
+  background: #FFE4E1;
+  z-index: 1;
+}
+
+/* Card expansion after image */
+.card-2.expanded {
+  opacity: 1;
+  transform: translate(-50%, -50%) translateY(-50px) scale(1.1);
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+}
+
+/* Media Queries for Different Screen Sizes */
+@media (max-width: 768px) {
+  .envelope-container {
+    width: 25vw;
+    height: calc(25vw * 0.75);
+  }
+
+  .card-2.expanded {
+    width: 90%;
+    height: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .envelope-container {
+    width: 40vw;
+    height: calc(40vw * 0.75);
+  }
+
+  .card-2.expanded {
+    width: 95%;
+    height: auto;
+  }
+}
+
+@media (max-width: 320px) {
+  .envelope-container { 
+    width: 60vw;
+    height: calc(60vw * 0.75);
+  }
+
+  .card-2.expanded {
+    width: 100%;
+    height: auto;
+  }
+}
